@@ -1,0 +1,143 @@
+/* ==========================================================================
+
+    * COPYRIGHT FILE FOR SOURCED IMAGES
+    * IMAGE SOURCE, AUTHOR AND LICENSE
+
+========================================================================== */
+
+/* --------------------------------------------------------------------------
+    >>> INDEX.PHP <<<
+-------------------------------------------------------------------------- */
+
+1.  images/opera-house-1600.jpg
+    images/opera-house-2048.jpg
+    File: index.php
+    Source: https://www.flickr.com/photos/theboyds/24449652795/
+    Author: https://www.flickr.com/photos/theboyds/
+    License: https://creativecommons.org/licenses/by-nc-nd/2.0/
+
+2.  images/harbour-bridge-800.jpg
+    File: index.php
+    Source: https://www.flickr.com/photos/georgeka/12311816816/
+    Author: https://www.flickr.com/photos/georgeka/
+    License: https://creativecommons.org/licenses/by-nc-nd/2.0/
+
+3.  images/award1-768.jpg
+    File: index.php
+    Source: https://www.pexels.com/photo/architecture-chair-contemporary-design-259576/
+    Author: https://pixabay.com/en/users/Giovanni_cg-1760325/
+    License: https://creativecommons.org/publicdomain/zero/1.0/
+
+4.  images/award2-768.jpg
+    File: index.php
+    Source: https://www.pexels.com/photo/architecture-sky-no-person-outdoors-108044/
+    Author: https://unsplash.com/@c_barbalis
+    License: https://creativecommons.org/publicdomain/zero/1.0/
+
+5.  images/award3-1200.jpg
+    File: index.php
+    Source: https://www.pexels.com/photo/3d-architectural-design-architectural-rendering-architecture-261146/
+    Author: https://pixabay.com/en/users/Giovanni_cg-1760325/
+    License: https://creativecommons.org/publicdomain/zero/1.0/
+
+
+/* --------------------------------------------------------------------------
+    >>> PROJECTS.PHP <<<
+-------------------------------------------------------------------------- */
+
+1.  images/slide1-1920.jpg
+    File: projects.php + project-1.php
+    Source: https://www.pexels.com/photo/architecture-chair-contemporary-design-259576/
+    Author: https://pixabay.com/en/users/Giovanni_cg-1760325/
+    License: https://creativecommons.org/publicdomain/zero/1.0/
+
+2.  images/slide2-1920.jpg
+    File: projects.php + project-2.php
+    Source: https://www.pexels.com/photo/3d-architectural-design-architectural-rendering-architecture-261146/
+    Author: https://pixabay.com/en/users/Giovanni_cg-1760325/
+    License: https://creativecommons.org/publicdomain/zero/1.0/
+
+3.  images/slide3-1920.jpg
+    File: projects.php + project-3.php
+    Source: https://www.pexels.com/photo/white-concrete-tall-building-with-books-159870/
+    Author: https://pixabay.com/en/users/misterfarmer-1004317/
+    License: https://creativecommons.org/publicdomain/zero/1.0/
+
+4.  images/slide4-1920.jpg
+    File: projects.php + project-4.php
+    Source: https://www.pexels.com/photo/architecture-sky-no-person-outdoors-108044/
+    Author: https://unsplash.com/@c_barbalis
+    License: https://creativecommons.org/publicdomain/zero/1.0/
+
+/* --------------------------------------------------------------------------
+    >>> STRATEGY.PHP <<<
+-------------------------------------------------------------------------- */
+
+1.  images/blueprint-1200.svg
+    File: strategy.php
+    Source: http://www.freepik.com/free-vector/architecture-background-design_1003656.htm
+    Author: >Designed by Freepik< http://www.freepik.com/archjoe
+    License: http://support.freepik.com/hc/en-us/articles/202567642-Are-Freepik-contents-for-free-and-where-can-I-use-them-
+    Credit: <a href='http://www.freepik.com/free-vector/architecture-background-design_1003656.htm'>Designed by Freepik</a>
+
+/* --------------------------------------------------------------------------
+    >>> ABOUT.PHP <<<
+-------------------------------------------------------------------------- */
+
+1.  images/about-background-1200.jpg
+    File: about.php
+    Source: https://unsplash.com/photos/j0g8taxHZa0
+    Author: https://unsplash.com/@samuelzeller
+    License: https://unsplash.com/license + https://creativecommons.org/publicdomain/zero/1.0/
+
+2.  images/about-background-2560.jpg
+    File: about.php
+    Source: https://unsplash.com/photos/j0g8taxHZa0
+    Author: https://unsplash.com/@samuelzeller
+    License: https://unsplash.com/license + https://creativecommons.org/publicdomain/zero/1.0/
+
+3.  images/about-blueprint-1.svg
+    File: about.php
+    Source: http://www.freepik.com/free-vector/architecture-background-design_1003811.htm
+    Author: http://www.freepik.com/archjoe
+    License: http://support.freepik.com/hc/en-us/articles/202567642-Are-Freepik-contents-for-free-and-where-can-I-use-them-
+
+4.  images/about-blueprint-2.svg
+    File: about.php
+    Source: http://www.freepik.com/free-vector/architecture-background-design_1003656.htm
+    Author: http://www.freepik.com/archjoe
+    License: http://support.freepik.com/hc/en-us/articles/202567642-Are-Freepik-contents-for-free-and-where-can-I-use-them-
+
+5.  images/about-blueprint-3.svg
+    File: about.php
+    Source: http://www.freepik.com/free-vector/architecture-banners-design_1003749.htm
+    Author: http://www.freepik.com/archjoe
+    License: http://support.freepik.com/hc/en-us/articles/202567642-Are-Freepik-contents-for-free-and-where-can-I-use-them-
+
+6.  images/person-1.jpg
+    File: about.php
+    Source: https://unsplash.com/photos/7omHUGhhmZ0
+    Author: https://unsplash.com/search/lahore-pakistan
+    License: https://unsplash.com/license + https://creativecommons.org/publicdomain/zero/1.0/
+
+7.  images/person-2.jpg
+    File: about.php
+    Source: https://unsplash.com/search/portrait?photo=1nizzZ-SFw4
+    Author: https://unsplash.com/@thepootphotographer
+    License: https://unsplash.com/license + https://creativecommons.org/publicdomain/zero/1.0/
+
+/* --------------------------------------------------------------------------
+    >>> CONTACT.PHP <<<
+-------------------------------------------------------------------------- */
+
+1.  images/contact-background-832.jpg
+    File: contact.php
+    Source: https://www.flickr.com/photos/paulcarmona/14565134621/
+    Author: https://www.flickr.com/photos/paulcarmona/
+    License: https://creativecommons.org/licenses/by-nc-nd/2.0/
+
+2.  images/contact-background-2048.jpg
+    File: contact.php
+    Source: https://www.flickr.com/photos/paulcarmona/14565134621/
+    Author: https://www.flickr.com/photos/paulcarmona/
+    License: https://creativecommons.org/licenses/by-nc-nd/2.0/

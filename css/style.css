@@ -1,0 +1,1369 @@
+/**
+ * Website: Australian Design Architects
+ * Version: 1.0
+ * Author: Mark Maddocks
+ * Author URI: http://www.mmaddocks.com
+*/
+
+/* ==========================================================================
+    >>> CONTENTS <<<
+========================================================================== */
+
+/*
+-- CH01 -- DEPENDENCIES
+        -- normalize.css
+        -- Bootstrap via CDN
+-- CH02 -- GLOBAL + TYPOGRAPHY
+-- CH03 -- HEADER
+        -- MEDIA QUERY TABLET+
+-- CH04 -- FOOTER
+        -- MEDIA QUERY TABLET+
+        -- MEDIA QUERY DESKTOP+
+-- CHO5 -- INDEX.PHP
+        -- MEDIA QUERY TABLET+
+-- CHO6 -- PROJECTS.PHP
+        -- MEDIA QUERY TABLET+
+-- CHO7 -- PROJECT-1.PHP
+        -- MEDIA QUERY TABLET+
+-- CHO8 -- PROJECT-2.PHP
+        -- MEDIA QUERY TABLET+
+*/
+
+/* ==========================================================================
+    *
+    *
+    * CH02 TYPOGRAPY
+    *
+    *
+========================================================================== */
+
+.fade-in {
+    animation: fadeIn ease-in 200ms;
+    animation-fill-mode:forwards; /*when the spec is finished*/
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.navbar {
+    animation: fadeDown ease-in 600ms;
+}
+@keyframes fadeDown {
+    from { opacity: 0; transform:  translate(0px,-100%); }
+    to   { opacity: 1; transform:  none; }
+}
+
+body, li, p {
+    font-family: "roboto", sans-serif; /* overiding bootstrap */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "montserrat", sans-serif; /* overiding bootstrap */
+}
+
+h1, h2 {
+    margin-top: 0; /* Necessary to prevent margin-top on h2 collapsing and exceeding parent */
+}
+
+/*
+ * Class to be toggled on click of hamburger
+ * Lock's the rest of the document from scrolling
+ * Can't be applied to <body> (iOS safari removed it)
+ */
+.nav-is-open {
+    overflow: hidden;
+    position: fixed;
+}
+
+/* ==========================================================================
+    *
+    *
+    * CH03 HEADER >> HEADER.PHP
+    *
+    *
+========================================================================== */
+
+/* When window is scrolled this class is added to .navbar */
+.navbar.navbar-scrolled {
+    height: 51px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+    /* 0(horizontal), 3px(vertical), 6px(blur), RGBA (alpha (opacity channel))
+    x2 box-shadow for added depth and layering */
+    transition: all 250ms linear;
+}
+
+/* New class to ensure no error. Adds white background on click of .navbar-toggle */
+.navbar.hamburger-clicked {
+    background-color: #fff;
+}
+
+    .navbar-toggle {
+        margin-top: 9px; /* overide bootstraps default - centres toggle for 50px container */
+    }
+
+        .navbar-toggle .icon-bar {
+            background-color: #fff;
+        }
+
+        /* change hamburger (.icon-bar) colour when window is scrolled */
+        .navbar-toggle .icon-bar.navbar-scrolled {
+            background-color: #333;
+        }
+
+        /* New class to ensure no error/clash with scrolling JS class assignmen */
+        .navbar-toggle .icon-bar.hamburger-clicked {
+            background-color: #333;
+        }
+
+    .navbar-brand {
+        height: auto; /* overiding bootstrap's default of 50px; */
+        padding: 10px 15px 10px 15px;
+    }
+
+    /* Navigation dropdown on mobile */
+    .navbar-collapse {
+        background-color: #fff;
+        border-top: 1px solid #333;
+    }
+
+        .navbar-fixed-top .navbar-collapse {
+            max-height: none; /* overide bootstrap */
+            height: 100vh; /* required so that child <ul> can be 100vh */
+        }
+
+        /* Due to iOS Safari bottom information bar (cuts off 100vh) */
+        .navbar-nav { /* <ul> */
+            margin-bottom: 0; /* remove bootstrap margin on nav <ul> */
+            /* height: calc(100vh - 51px); 100vh - the navbar height */
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
+        }
+
+            .dropdown-menu {
+                text-align: center;
+            }
+
+/* --------------------------------------------------------------------------
+    >>> NAVIGATION LINKS <<<
+-------------------------------------------------------------------------- */
+
+.navbar-nav > li {
+    margin: 10px 0px 10px; /* reposition for iOS Safari */
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+    .navbar-nav > li > a {
+        color: #333;
+        padding: 20px 0px 20px 0px; /* increase padding for vertical nav */
+        font-size: 25px; /* larger for mobile nav opened */
+    }
+
+    /* change nav-items <a> colour when window is scrolled */
+    .navbar-item.navbar-scrolled {
+        color: #333;
+    }
+
+    /* When the dropdown is open */
+    .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+        border: none; /* overide bootstrap */
+    }
+
+    /* class for ACTIVE page when NOT scrolled */
+    .active {
+        border-bottom: 1px solid #fff;
+    }
+    /* class for ACTIVE page when IS scrolled */
+    .active.navbar-scrolled {
+        border-bottom: 1px solid #333;
+    }
+
+/* --------------------------------------------------------------------------
+    >>> HAMBURGER --> "X" ANIMATION <<<
+-------------------------------------------------------------------------- */
+
+.icon-bar {
+    transition: transform 0.2s; /* transition to below classes */
+}
+    /* top bar default - no rotation (hamburger)*/
+    .navbar-toggle.collapsed > .top-bar {
+        transform: rotate(0);
+    }
+    .top-bar {
+        transform: rotate(45deg); /* animate down 45 degrees */
+        transform-origin: 10% 10%; /* left top */
+    }
+
+    /* middle bar default - no rotation (hamburger)*/
+    .navbar-toggle.collapsed > .middle-bar {
+        opacity: 1;
+    }
+    .middle-bar {
+        opacity: 0; /* fade out */
+    }
+
+    /* bottom bar default - no rotation (hamburger)*/
+    .navbar-toggle.collapsed > .bottom-bar {
+        transform: rotate(0);
+    }
+    .bottom-bar {
+        transform: rotate(-45deg); /* animate up 45 degrees */
+        transform-origin: 10% 90%; /* left bottom (horizontal, vertical) */
+    }
+
+/* ==========================================================================
+    >>> NAVIGATION MEDIA QUERY - Tablet+ <<<
+========================================================================== */
+
+@media (min-width: 768px) {
+
+    .navbar-collapse {
+        background-color: rgba(0,0,0,0); /* overide mobile background colour of white */
+        border-top: none; /* overdide mobile border-top on collapsed navigation */
+    }
+
+        .navbar-nav {
+            display: block; /* counter display: flex; for mobile nav */
+            height: auto; /* clear the calc(100vh - 51px) for mobile nav */
+        }
+            .navbar-nav > li {
+                margin: 0px; /* overide mobile setup */
+                padding: 12.5px 25px 12.5px 25px; /* overide bootstrap - padding to match 50px navbar */
+            }
+                .navbar-nav > li > a {
+                    color: #fff; /* overide mobile */
+                    padding: 0px 0px 5px 0px; /* overide bootstrap - padding for link (:hover border-bottom) */
+                    font-size: 14px; /* decrease font size for tablet upwards */
+                }
+
+                .nav > li > a:focus, .nav > li > a:hover {
+                    border-bottom: 1px solid #fff;
+                    background-color: rgba(0, 0, 0, 0); /* overide bootstrap default */
+                }
+
+                .navbar-item.navbar-scrolled:hover {
+                    border-bottom: 1px solid #333; /* for desktop version */
+                }
+
+/* --------------------------------------------------------------------------
+>>> DROPDOWN MENU <<<
+-------------------------------------------------------------------------- */
+            .nav .open > a, .nav .open >a:hover, .nav .open >a:focus {
+                background-color: rgba(0, 0, 0, 0);
+                border-bottom: 1px solid #fff;
+            }
+                .navbar-right .dropdown-menu {
+                    left: 0;
+                }
+
+                .dropdown-menu {
+                    text-align: left;
+                }
+}
+
+/* ==========================================================================
+    *
+    *
+    * CH04 FOOTER >> FOOTER.PHP
+    *
+    *
+========================================================================== */
+
+/* This adds the decorative lines to the break before the footer */
+.section-break {
+    width: 100%;
+    height: 40px;
+    content: "";
+    background-color: rgba(0, 0, 0, 0.1);
+    background: repeating-linear-gradient(
+        315deg, /* set the angle */
+        rgba(0, 0, 0, 0.2), /* color stop 1 - Start */
+        rgba(0, 0, 0, 0.2) 2.5px, /* color stop 1 + position to stop */
+        rgba(0, 0, 0, 0.1) 2.5px, /* color stop 2 + position to start from */
+        rgba(0, 0, 0, 0.1) 10px ); /* color stop 2 + position to stop */
+    opacity: 0.3; /* reduce visability */
+}
+
+#membership-container {
+    padding-top: 30px;
+    padding-bottom: 10px; /* padding bottom is 20px less due to padding-bottom: 20px on img */
+}
+
+    #membership-img-row {
+        max-width: 400px;
+        margin: auto;
+    }
+
+        .membership-img-container {
+            display: flex; /* centre image within this container */
+            justify-content: center; /* centre image within this container */
+            padding-bottom: 20px;
+        }
+
+#footer-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+    .footer-item-container {
+        display: flex; /* centre image within this container */
+        justify-content: center; /* centre image within this container */
+    }
+
+        .footer-item-container:first-child {
+            margin-bottom: 5px;
+        }
+
+        .footer-item-container:first-child > a {
+            color: #333;
+        }
+
+        .footer-item-container > a {
+            margin: 0px 5px 0px 5px; /* spacing around images */
+        }
+
+/* ==========================================================================
+    >>> FOOTER MEDIA QUERY - Tablet+ <<<
+========================================================================== */
+
+@media (min-width: 768px) {
+
+    #membership-img-row {
+        max-width: 600px; /* limit expansion */
+    }
+
+    #footer-row-container {
+        display: flex;
+        align-items: center; /* flex for veritcal alignment with social images */
+        max-width: 1200px; /* prevent footer row from continuosly expanding */
+        margin: auto;
+    }
+
+        .footer-item-container:first-child {
+            margin-bottom: 0; /* remove margin for veritcal alignment */
+        }
+
+        .footer-item-container:nth-child(2) > p {
+            margin-bottom: 0; /* remove margin for veritcal alignment */
+        }
+}
+
+/* ==========================================================================
+    >>> FOOTER MEDIA QUERY - Desktop+ <<<
+========================================================================== */
+
+@media (min-width: 992px) {
+
+        #membership-img-row {
+            max-width: 900px; /* limit expansion */
+        }
+}
+
+
+/* ==========================================================================
+    *
+    *
+    * CH05 HOME PAGE >> INDEX.PHP
+    *
+    *
+========================================================================== */
+
+/* --------------------------------------------------------------------------
+    >>> HERO-SECTION <<<
+-------------------------------------------------------------------------- */
+#hero-container {
+    width: 100%;
+    height: 100vh; /* use px if wanting to limit viewport/what is visible */
+    background-image: url(../images/opera-house-1600.jpg);
+    background-size: 1600px 716px, cover;
+    background-position-x: center; /* horizontal centre only - to prevent sitting veritcally centre of container */
+    background-repeat: no-repeat;
+    overflow: hidden;
+    background-attachment: fixed; /* parallax scrolling - image position is fixed */
+    display: flex; /* horizontal and vertical centre hero-title */
+    justify-content: center; /* horizontal and vertical centre hero-title */
+    align-items: center; /* horizontal and vertical centre hero-title */
+    flex-direction: column; /* horizontal and vertical centre hero-title */
+}
+
+    #hero-brand-container {
+        color: #fff;
+        text-align: center;
+    }
+
+        #hero-brand-container > img {
+            display: block;
+            vertical-align: baseline;
+            margin: auto;
+        }
+
+        #hero-title-container {
+            display: block;
+            margin-top: 15px;
+        }
+
+            .hero-title {
+                margin: 0;
+                line-height: 1;
+                text-transform: uppercase;
+                word-break: break-all;  /* Prevent heading overflowing container */
+            }
+
+            .hero-title:first-of-type {
+                font-size: 23px;
+                font-weight: 400;
+                letter-spacing: 2px;
+            }
+
+            .hero-title:last-of-type {
+                font-size: 32px;
+                font-weight: 100;
+                letter-spacing: 8px;
+            }
+
+        #expertise-container {
+            display: flex; /* This ensures child <ul> is centred and <li>'s are left aligned */
+            justify-content: center;
+        }
+
+            #expertise-container > ul {
+                margin-top: 30px;
+                padding: 0;
+            }
+
+                #expertise-container > ul > li {
+                    position: relative; /* For absolute postioning of :before line */
+                    padding-left: 60px;
+                    list-style: none;
+                    color: #fff;
+                    font-weight: 100;
+                    text-transform: uppercase;
+                    letter-spacing: 3px;
+                }
+
+                #expertise-container > ul > li:before {
+                    content: "";
+                    width: 30px;
+                    position: absolute;
+                    left: 15px;
+                    top: 50%;
+                    border-top: 1px solid #fff;
+                }
+
+/* --------------------------------------------------------------------------
+    >>> OVERVIEW SECTION <<<
+-------------------------------------------------------------------------- */
+#overview-content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* vertical alignment for desktop */
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+    #overview-content {
+        max-width: 450px; /* stop content (paragraph) expanding to full width of container */
+    }
+
+        #overview-content > h2 {
+            position: relative;
+            margin-bottom: 20px;
+            font-size: 50px;
+        }
+
+        #overview-content > h2::after {
+            content: "";
+            width: 40px;
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            border-top: 4px solid #333;
+        }
+
+        #overview-content > a {
+            margin-top: 10px; /* button spacing */
+        }
+
+        #overview-img-container {
+            max-height: 350px; /* Prevent image container (including image) from growing bigger */
+            padding: 0; /* remove default padding */
+            overflow: hidden;
+        }
+
+            #overview-img-container > img {
+                width: 100%; /* shrink image to fit in container with proportions */
+                height: auto; /* maintain image proportions */
+                object-fit: cover; /* crops image both sides & forces image to fill container */
+            }
+
+/* --------------------------------------------------------------------------
+    >>> AWARDS SECTION <<<
+-------------------------------------------------------------------------- */
+
+#awards-title-content {
+    padding: 10px 15px 10px 15px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+    #awards-title-content > h2 {
+        position: relative;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 50px;
+    }
+
+    /* title underline */
+    #awards-title-content > h2::after {
+        content: "";
+        width: 40px;
+        position: absolute;
+        margin-left: auto; /* position centre */
+        margin-right: auto; /* position centre */
+        left: 0; /* position centre */
+        right: 152px; /* move line to the left (line up with start of h2)*/
+        bottom: -2px;
+        border-top: 4px solid #333;
+    }
+
+        #awards-title-content > p {
+            max-width: 500px; /* do not grow past */
+            margin: 0px auto 10px auto; /* centre <p> but maintain standar bottom margin */
+        }
+
+.award-container {
+    position: relative; /* for absolute positioning on h3 */
+    padding: 0; /* overide bootstrap padding for col-xs-12 */
+    overflow: hidden;
+}
+
+/* apply overlay transparency to make text more legible */
+.award-container::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+    .award-container > img {
+        max-width: 100%; /* crop image/grow image from both sizes */
+        object-fit: cover; /* crop image/grow image from both sizes */
+    }
+
+    .award-text-container {
+        width: 100%;
+        position: absolute;
+        margin: 0; /* position centre */
+        top: 50%; /* position centre */
+        left: 50%; /* position centre */
+        transform: translate(-50%, -50%); /* position centre */
+        padding: 0px 15px 0px 15px; /* stop title encroaching the edges */
+        text-align: center;
+        color: #fff;
+        z-index: 2; /* ensure heading is infront of overlay */
+    }
+
+        /* view project button */
+        .award-text-container a {
+            width: 150px;
+            margin-top: 10px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0);
+            font-weight: 300;
+        }
+
+/* ==========================================================================
+    >>> INDEX.PHP MEDIA QUERY - Tablet and above <<<
+========================================================================== */
+
+@media (min-width: 768px) {
+
+/* --------------------------------------------------------------------------
+    >>> HERO SECTION <<<
+-------------------------------------------------------------------------- */
+    #hero-container {
+        zmax-height: 916px; /* do not exceed image dimensions to fit 100vh */
+        height: 100vh; /* required for full viewport alignment on large displays */
+        background-image: url(../images/opera-house-2048.jpg);
+        background-size: cover; /* natural size = 2048px 916px */
+    }
+
+        #hero-brand-container {
+            color: #fff;
+            text-align: center;
+        }
+
+            #hero-brand-container > img {
+                display: inline-block;
+                vertical-align: baseline;
+            }
+
+            #hero-title-container {
+                display: inline-block;
+                margin-left: 30px;
+            }
+
+                .hero-title {
+                    margin: 0;
+                    line-height: 1;
+                    text-transform: uppercase;
+                    text-align: left;
+                    word-break: break-all;  /* Prevent heading overflowing container */
+                }
+
+                .hero-title:first-of-type {
+                    font-size: 40px;
+                    font-weight: 400;
+                    letter-spacing: 4px;
+                }
+
+                .hero-title:last-of-type {
+                    font-size: 62px;
+                    font-weight: 100;
+                    letter-spacing: 13px;
+                }
+
+            #expertise-container > ul {
+                display: flex;
+                justify-content: center;
+                flex-direction: row;
+                margin-top: 30px;
+            }
+
+                #expertise-container > ul > li {
+                    position: relative; /* For absolute postioning of :before line */
+                    padding-left: 60px;
+                    list-style: none;
+                    color: #fff;
+                    font-weight: 100;
+                    text-transform: uppercase;
+                    letter-spacing: 3px;
+                }
+
+                #expertise-container > ul > li::before {
+                    content: "";
+                    width: 30px;
+                    position: absolute;
+                    left: 15px;
+                    top: 50%;
+                    border-top: 1px solid #fff;
+                }
+
+/* --------------------------------------------------------------------------
+    >>> OVERVIEW SECTION <<<
+-------------------------------------------------------------------------- */
+    #overview-content-container {
+        height: 350px; /* fixed height to allow vertical alignment (flexbox) */
+    }
+
+        #overview-img-container > img {
+            width: auto; /* counter width: 100% - returns the natural image size (not shrunk to container) */
+            height: auto; /* maintain image proportions */
+        }
+}
+
+
+/* ==========================================================================
+    *
+    *
+    * CH06 PROJECTS PAGE >> PROJECTS.PHP
+    *
+    *
+========================================================================== */
+
+#slides {
+    position: relative; /* for slideshow */
+    padding: 0;
+}
+
+    .slide {
+        position: absolute; /* for slideshow */
+        left: 0px; /* for slideshow */
+        top: 0px; /* for slideshow */
+        z-index: 1; /* for slideshow */
+        transition: opacity 1s; /* for slideshow */
+        position: relative;
+    }
+
+    .hide-slide {
+        display: none; /* required so img does not use space */
+        opacity: 0;
+    }
+
+    .show-slide {
+        display: visible;
+        opacity: 1;
+        z-index: 2;
+    }
+
+        .slide > img {
+            max-width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
+
+        .slide > h2 {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            margin-bottom: 0; /* remove default <h2> margin */
+            padding: 10px 15px 10px 15px;
+            color: #fff;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background-color: #333;
+        }
+
+    .slide-controls {
+        position: absolute;
+        top: 50%;
+        transform: translate(0%, -50%); /* vertical centre */
+        z-index: 3;
+        font-size: 20px;
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0); /* overide bootstrap */
+        border: none; /* overide bootstrap */
+    }
+
+    .slide-controls:focus, .slide-controls:hover, .slide-controls:active:focus {
+        color: #fff; /* overide bootstrap */
+        outline: none; /* overide bootstrap :active:hover */
+        box-shadow: none; /* overide bootstrap :active:hover */
+    }
+
+    #previous { left: 0; }
+    #next { right: 0; }
+
+
+/* ==========================================================================
+    *
+    *
+    * CH07 INDIVIDUAL PROJECT PAGE >> PROJECT-1.PHP, PROJECT-2.PHP ETC...
+    *
+    *
+========================================================================== */
+
+    .project-info-container {
+        padding: 30px 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+        .project-info-container > table {
+            width: 100%;
+        }
+
+        .project-info-container tr {
+            border-top: 1px solid #999;
+        }
+
+        .project-info-container tr:last-of-type {
+            border-bottom: 1px solid #999;
+        }
+
+            .project-info-container td {
+                padding: 10px 10px 10px 0px;
+                text-align: right;
+                font-weight: 100;
+            }
+
+#tables-container::before {
+    width: 100%;
+    height: 40px;
+    content: "";
+    zpadding: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    background: repeating-linear-gradient(
+        315deg, /* set the angle */
+        rgba(0, 0, 0, 0.2), /* color stop 1 - Start */
+        rgba(0, 0, 0, 0.2) 2.5px, /* color stop 1 + position to stop */
+        rgba(0, 0, 0, 0.1) 2.5px, /* color stop 2 + position to start from */
+        rgba(0, 0, 0, 0.1) 10px ); /* color stop 2 + position to stop */
+    opacity: 0.3; /* reduce visability */
+}
+
+/* ==========================================================================
+    *
+    *
+    * CH08 STRATEGY PAGE >> STRATEGY.PHP
+    *
+    *
+========================================================================== */
+
+
+#strategy-container {
+    width: 100%;
+    background-image: url(../images/blueprint-1200.svg);
+    background-size: cover; /* 1200px 1200px removed dimensions to allow stretching */
+    background-position-x: center; /* horizontal centre only - to prevent sitting veritcally centre of container */
+    background-repeat: no-repeat;
+    overflow: hidden;
+    position: relative; /* for absolute on ::after transparency layer */
+    z-index: -3;
+    padding-bottom: 50px;
+}
+
+/* Transparency (white) overlay */
+#strategy-container::before {
+    width: 100%;
+    height: 2400px; /* to always exceed the flexible background image */
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    background-color: rgba(255, 255, 255, 0.5); /* white overlay 0.5 transparency */
+    z-index: -2;
+}
+
+    #strategy-title {
+        margin-top: 80px; /* first .content-container */
+    }
+    .content-container {
+        max-width: 600px;
+        margin: 15px auto 15px auto;
+        padding: 20px 15px 20px 15px;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.16);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+    }
+
+        .content-container > h1 {
+            position: relative;
+            font-size: 50px;
+            text-align: center;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        .content-container > h1::after {
+            content: "";
+            width: 40px;
+            position: absolute;
+            margin-left: auto; /* position centre */
+            margin-right: auto; /* position centre */
+            left: 0; /* position centre */
+            right: 220px; /* move line to the left (line up with start of h2)*/
+            bottom: -2px;
+            border-top: 4px solid #333;
+        }
+
+        .content-container > h4 {
+            text-transform: uppercase;
+        }
+
+/* ==========================================================================
+    *
+    *
+    * CH09 ABOUT PAGE >> ABOUT.PHP
+    *
+    *
+========================================================================== */
+
+    #about-hero-container {
+        width: 100%;
+        height: 100vh; /* use px if wanting to limit viewport/what is visible */
+        background-image: url(../images/about-background-1200.jpg);
+        background-size: cover; /* natural size 1200px 800px */
+        background-position-x: center; /* horizontal centre only - to prevent sitting veritcally centre of container */
+        background-repeat: no-repeat;
+        overflow: hidden;
+        /* background-attachment: fixed; parallax scrolling - image position is fixed. Stretches image on mobile */
+        position: relative;
+        display: flex; /* for child <h3> */
+        justify-content: center;  /* for child <h3> */
+        align-items: center;  /* for child <h3> */
+        z-index: -3; /* set to back */
+    }
+
+    #about-hero-container::after {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: -2; /* infront of img, but behind text content */
+    }
+
+        .about-hero-content {
+            max-width: 650px; /* prevent from growing */
+            color: #fff;
+            z-index: -1; /* bring in front of the overlay, but behind the rest of page for scroll */
+        }
+
+        .about-hero-content > h3 {
+            text-align: center;
+            line-height: 1.25;
+        }
+
+    #about-section-1 {
+        width: 100%;
+        background-image: url(../images/about-blueprint-1.svg);
+        background-size:  cover; /* natural size 1200px 600px */
+        background-position-x: center;
+        background-position-y: center;
+    }
+
+    #about-section-2 {
+        width: 100%;
+        background-image: url(../images/about-blueprint-2.svg);
+        background-size:  cover; /* natural size 1200px 600px */
+        background-position-x: center;
+        background-position-y: center;
+    }
+
+    #about-section-3 {
+        width: 100%;
+        background-image: url(../images/about-blueprint-3.svg);
+        background-size:  cover; /* natural size 1200px 600px */
+        background-position-x: center;
+        background-position-y: center;
+    }
+
+        .about-p-content {
+            padding: 50px 15px 50px 15px;
+        }
+
+            .about-p-content > p {
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+.person-container {
+    background-color: #000;
+}
+            .person-img {
+                width: 100%;
+                height: auto;
+            }
+
+    .person-content-container {
+        padding: 30px 15px 30px 15px;
+        text-align: center;
+        color: #fff;
+        background-color: #000;
+    }
+
+        .person-social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            padding: 0;
+            color: #fff;
+        }
+
+            .person-social-links > li {
+                position: relative; /* For absolute postioning of :before line */
+                padding: 0px 10px 0px 40px; /* padding used to position line to outer edge */
+                list-style: none;
+                text-transform: uppercase;
+                font-weight: 100;
+                letter-spacing: 1px;
+            }
+
+            .person-social-links > li::before {
+                content: "";
+                width: 30px;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                border-top: 1px solid #fff;
+            }
+
+            .person-social-links > li:nth-child(2) {
+                padding-right: 40px; /* padding used to position line for last <li> */
+            }
+
+            /* Adding a line after the last <li> as well */
+            .person-social-links > li:nth-child(2)::after {
+                content: "";
+                width: 30px;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                border-top: 1px solid #fff;
+            }
+
+                .person-social-links > li > a {
+                    color: #fff;
+                    text-decoration: none;
+                }
+                .person-social-links > li > a:hover {
+                    color: rgba(255, 255, 255, 0.5);
+                }
+
+    #contact-on-about {
+        padding: 20px 15px;
+    }
+        #contact-on-about > h3 {
+            text-align: center;
+        }
+        #contact-on-about > a {
+            display: block; /* overide - bootstrap: inline-block */
+            max-width: 150px;
+            margin: 20px auto;
+            text-transform: uppercase;
+        }
+
+/* ==========================================================================
+    >>> ABOUT.PHP MEDIA QUERY - Tablet and above <<<
+========================================================================== */
+
+@media (min-width: 768px) {
+
+        #about-hero-container {
+            background-image: url(../images/about-background-2560.jpg); /* serve larger img */
+            /* natural size 2560px 1707px */
+        }
+
+            .about-hero-content > h3 {
+                font-size: 30px; /* increase font size */
+            }
+
+    .person-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .person-content-container {
+            text-align: left; /* remove centre aligned <p> text */
+        }
+
+            .person-social-links {
+                justify-content: flex-start; /* left align */
+            }
+
+}
+
+
+/* ==========================================================================
+    *
+    *
+    * CH10 CONTACT PAGE >> CONTACT.PHP
+    *
+    *
+========================================================================== */
+
+#contact-container {
+    overflow: hidden; /* hide skewed ".meet-us-container" */
+}
+
+#contact-hero-background {
+    width: 100%;
+    height: 100vh; /* use px if wanting to limit viewport/what is visible */
+    background-image: url(../images/contact-background-832.jpg);
+    background-size: cover; /* natural size 832px 543px */
+    background-position-x: center; /* horizontal centre only - to prevent sitting veritcally centre of container */
+    background-repeat: no-repeat;
+    overflow: hidden;
+    position: relative; /* for transparency overlay */
+    display: flex; /* align child .row (#contact-hero-container) */
+    justify-content: center; /* horizontal align child .row (#contact-hero-container) */
+    align-items: center;  /* vertical align child .row (#contact-hero-container)*/
+}
+
+#contact-hero-background::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 0; /* infront of img, but behind text content */
+}
+
+    #contact-hero-container {
+        z-index: 1; /* infront of overlay */
+    }
+
+        .contact-hero-content {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+            .contact-hero-content > h1 {
+                color: #fff;
+                font-weight: 400;
+            }
+
+            .contact-hero-content > h3 {
+                font-size: 20px;
+                font-weight: 400; /* increased weight for mobile readability */
+                text-transform: none;
+                color: #fff;
+            }
+
+            .contact-hero-btn {
+                width: 150px;
+                margin-top: 10px; /* increase space on mobile */
+                font-size: 18px;
+                font-weight: 300;
+                color: #fff;
+                background-color: rgba(0, 0, 0, 0);
+            }
+
+            .contact-hero-btn:hover {
+                background-color: rgba(255, 255, 255, 1);
+            }
+
+        .address-hero-content {
+            margin-top: 40px; /* increase spacing between columns */
+            text-align: center;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+            .address-hero-content > h1 {
+                font-size: 24px;
+                font-weight: 300;
+                letter-spacing: 2px;
+            }
+
+/* --------------------------------------------------------------------------
+    >>> FORM SECTION <<<
+-------------------------------------------------------------------------- */
+#form-container{
+    max-width: 400px;
+    margin: 0 auto;
+    float: none; /* clearing floated col-xs-12, enabling margin: auto */
+    padding: 40px 15px 80px 15px;
+}
+
+    #form-container > h3 {
+        margin-bottom: 20px;
+    }
+
+    #form-container button[type="submit"] {
+        color: #999;
+    }
+    #form-container button[type="submit"]:hover {
+        color: #333;
+    }
+
+.modal {
+    top: 50%; /* overide bootstrap - position vertical centre */
+    bottom: auto; /* overide bootstrap - position vertical centre */
+    transform: translate(0,-50%); /* overide bootstrap - position vertical centre */
+}
+
+    .modal-dialog {
+        max-width: 600px;
+    }
+        #myModalLabel {
+            display: inline-block; /* h4 heading to be inline */
+            margin-left: 10px;
+        }
+
+        .glyphicon-send {
+            top: 3px;
+            font-size: 18px;
+        }
+
+        .modal-body {
+            padding: 20px 15px;
+        }
+
+/* --------------------------------------------------------------------------
+    >>> MAP SECTION <<<
+-------------------------------------------------------------------------- */
+
+#meet-us-container {
+    position: relative;
+    padding: 100px 0px 40px 0px;
+    zoverflow: hidden; /* hide ::before shape workaround as parent cuts off hero on <a> */
+    zheight: 100%;
+}
+
+#meet-us-container::before {
+    display: block;
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 150%;
+    top: 0;
+    transform: skewY(-10deg);
+    background-color: rgba(0,0,0,0.04);
+    z-index: -1;
+    /* height: 1000px;
+    margin: -1000px 0 0 0; Alternative to reverse the grey onto form */
+}
+
+    #meet-us-container h1 {
+        font-size: 40px;
+        text-transform: uppercase;
+    }
+    #meet-us-container h3 {
+        font-weight: 300;
+    }
+
+    .meet-us-address {
+        padding: 20px 15px;
+    }
+        #meet-us-container h4 {
+            font-size: 24px;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+
+    .email-tel-container {
+        padding: 0px 15px 20px 15px;
+    }
+        .email-tel-container > h5 {
+            font-size: 16px;
+            font-weight: 300;
+            ztext-transform: uppercase;
+        }
+
+    #mac-os-btn-container {
+        position: absolute;
+        z-index: 4;
+        padding: 2px 4px 0px 4px;
+    }
+        .mac-btn {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+        .close-btn {
+            background: #ff5c5c;
+            border: 1px solid #e33e41;
+        }
+        .minimise-btn {
+            background: #ffbd4c;
+            border: 1px solid #e09e3e;
+        }
+        .fullscreen-btn {
+            background: #00ca56;
+            border: 1px solid #14ae46;
+        }
+
+    #map {
+        height: 300px;
+        border-width: 22px 2px 2px 2px;
+        border-style: solid;
+        border-color: #f3f2f2;
+        border-radius: 5px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    }
+
+/* ==========================================================================
+    >>> CONTACT.PHP MEDIA QUERY - Tablet and above <<<
+========================================================================== */
+
+@media (min-width: 768px) {
+
+        #contact-hero-background {
+            background-image: url(../images/contact-background-2048.jpg); /* natural size 2048px 1336px */
+        }
+
+            .contact-hero-content {
+                max-height: 290px;
+                text-align: left;
+            }
+                .contact-hero-content > h1 {
+                    font-size: 70px;
+                }
+                .contact-hero-content > h3 {
+                    font-size: 24px;
+                }
+
+            .address-hero-content {
+                margin-top: 0;
+                text-align: right;
+            }
+
+                .address-hero-content > h1 {
+                    font-size: 40px;
+                }
+
+                .contact-hero-btn {
+                    margin-top: 20px;
+                }
+
+        #form-container {
+            padding-bottom: 120px; /* increase spacing for alignment with diagonal line */
+            max-width: 800px;
+        }
+
+    #meet-us-container {
+        padding-top: 150px; /* increase spacing for alignment with diagonal line */
+    }
+
+        #meet-us-container > div:nth-child(2) {
+            padding-top: 64px; /* padding to align map with "where are we <h1>" */
+        }
+
+            .email-tel-container {
+                padding: 20px 15px 20px 15px; /* add padding top to align with address */
+            }
+}
+
+
+/* ==========================================================================
+    *
+    *
+    * CH08 PRIVACY POLICY PAGE >> PRIVACY-POLICY.PHP
+    *
+    *
+========================================================================== */
+
+
+#privacy-container {
+    width: 100%;
+    padding-bottom: 50px;
+}
+
+    #privacy-title {
+        margin-top: 80px; /* first .content-container */
+    }
+    .privacy-content-container {
+        max-width: 600px;
+        margin: 15px auto 15px auto;
+        padding: 20px 15px 20px 15px;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.16);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+    }
+
+        .privacy-content-container > h1 {
+            position: relative;
+            font-size: 50px;
+            text-align: center;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        .privacy-content-container > h1::after {
+            content: "";
+            width: 40px;
+            position: absolute;
+            margin-left: auto; /* position centre */
+            margin-right: auto; /* position centre */
+            left: 0; /* position centre */
+            right: 176px; /* move line to the left (line up with start of h2)*/
+            bottom: -2px;
+            border-top: 4px solid #333;
+        }
+
+        .privacy-content-container > h4 {
+            text-transform: uppercase;
+        }
+
+/* ==========================================================================
+    * END
+========================================================================== */
